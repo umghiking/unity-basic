@@ -5,7 +5,7 @@ public class Bechu : MonoBehaviour
     //속도 선언
     [SerializeField]//유니티에서 바꿀수 있게 도와줌
     float speed;
-    //방향 선언
+    //방향 선언(방향 제로)
     Vector3 vector = Vector3.zero;
     [SerializeField]
     public GameObject bullet;
@@ -18,6 +18,7 @@ public class Bechu : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
+        //방향 새로 대입해짐
         vector = new Vector3(x, y, 0);
         transform.position += vector * speed * Time.deltaTime;
         
