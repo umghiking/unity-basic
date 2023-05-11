@@ -106,4 +106,62 @@ public class Object : MonoBehaviour
     //0.5초마다 실행
     if(objectspawntime >= 0.5)
 }
+#점프
+public class Circle : MonoBehaviour
+{
+   
+   
+    [SerializeField]
+    float speed;
+    float x;
+    [SerializeField]
+    float jumppower;
+    Rigidbody2D rigid;
+
+    [SerializeField]
+    LayerMask groundlayer;
+    bool grounded = true;
+    CircleCollider2D circleCollider;
+    Vector3 footposition;
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+    }
+    private void Update()
+    {
+        x = Input.GetAxisRaw("Horizontal");
+       //움직임
+        rigid.velocity = new Vector2(x * speed, rigid.velocity.y);
+
+        if(Input.GetKeyDown(KeyCode.Space) && grounded == true)
+        {
+            grounded = false;
+            rigid.velocity = Vector2.up * jumppower;
+        }
+    }
+    private void FixedUpdate()
+    {
+       //점프해서 위로 올라갈땐 중력이 1,떨어질땐 2.5크기
+        if(rigid.velocity.y > 0)
+        {
+            rigid.gravityScale = 1.0f;
+        }
+        else
+        {
+            rigid.gravityScale = 2.5f;
+        }
+        //collider의 min,center,max 위치 정보
+        Bounds bounds = circleCollider.bounds;
+        //발위치
+        footposition = new Vector2(bounds.center.x, bounds.min.y);
+        //발위치에 0.1f지름의 크기 원을 만들고 발위치에 생성하고 만약 닿는다면 grounded가 true가 된다
+        grounded = Physics2D.OverlapCircle(footposition, 0.1f, groundlayer);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(footposition, 0.1f);
+    }
+}
 
