@@ -1,7 +1,7 @@
 # unity-basic
 public class Bechu : MonoBehaviour
 {
-    //2d 움직이기
+    
     //속도 선언
     [SerializeField]//유니티에서 바꿀수 있게 도와줌
     float speed;
