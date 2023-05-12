@@ -131,9 +131,9 @@ public class Circle : MonoBehaviour
     private void Update()
     {
         x = Input.GetAxisRaw("Horizontal");
-       //움직임
+        //움직임
         rigid.velocity = new Vector2(x * speed, rigid.velocity.y);
-
+        //스페이스바를 누루고 grounded가 true인걸 충족해야 실행
         if(Input.GetKeyDown(KeyCode.Space) && grounded == true)
         {
             grounded = false;
