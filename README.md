@@ -161,6 +161,7 @@ public class Circle : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
+        //0.1f 크기의 구를 footposition에 만들기
         Gizmos.DrawSphere(footposition, 0.1f);
     }
 }
