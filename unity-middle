@@ -1,0 +1,18 @@
+#타겟 스크립트
+public class Rotate : MonoBehaviour
+{
+    //회전 속도 선언
+    [SerializeField]
+    float rotatespeed = 50;
+    //회전 방향 선정
+    [SerializeField]
+    Vector3 rotateangle = Vector3.forward;
+
+    private void Update()
+    {
+        //회전 속도 * 회전 방향
+        transform.Rotate(rotateangle * rotatespeed * Time.deltaTime);
+    }
+}
+
+#
