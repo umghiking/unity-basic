@@ -15,4 +15,16 @@ public class Rotate : MonoBehaviour
     }
 }
 
-#
+#핀 스폰 스크립트
+public class PinSpawn : MonoBehaviour
+{
+    //
+    [Header("Commons")]
+    [SerializeField]
+    GameObject pinPrefab;
+    public void Pinspawn(Vector2 position)
+    {
+        Instantiate(pinPrefab,position,Quaternion.identity);
+    }
+}
+
