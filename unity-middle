@@ -1,4 +1,5 @@
 #타겟 스크립트
+
 public class Rotate : MonoBehaviour
 {
     //회전 속도 선언
