@@ -1,5 +1,4 @@
-#unity-basic
-#unity-middle
+
 #타겟 스크립트
 
 public class Rotate : MonoBehaviour
@@ -21,15 +20,17 @@ public class Rotate : MonoBehaviour
 #핀 스폰 스크립트
 public class PinSpawn : MonoBehaviour
 {
-    //
+    //스크립트 위에 굵은 글씨로 "Commons" 출력
     [Header("Commons")]
+    //오브젝트 지정
     [SerializeField]
     GameObject pinPrefab;
+    //함수(위치값) 
     public void Pinspawn(Vector2 position)
     {
+        //지정한 오브젝트  
         Instantiate(pinPrefab,position,Quaternion.identity);
     }
 }
 
-![스크린샷(6)](https://github.com/umghiking/unity-basic/assets/133185243/ebbaddaf-f447-4e38-a0ce-7886ac8dca70)
-
+#
