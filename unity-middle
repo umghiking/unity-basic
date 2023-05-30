@@ -18,39 +18,65 @@ public class Rotate : MonoBehaviour
 }
 
 #핀 스폰 스크립트
-public class PinSpawn : MonoBehaviour
+public class PinSpawner : MonoBehaviour
 {
-    //스크립트 위에 굵은 글씨로 "Commons" 출력
     [Header("Commons")]
-    //오브젝트 지정
     [SerializeField]
-    GameObject pinPrefab;
-    //함수(위치값) 
-    public void Pinspawn(Vector2 position)
+    private GameObject pinPrifeb;
+
+    [Header("Stuck Pin")]
+    [SerializeField]
+    private Transform targetTransform;
+    [SerializeField]
+    private Vector3 targetPosition = Vector3.up * 2;
+    [SerializeField]
+    private float targetRadius = 0.8f;
+    [SerializeField]
+    private float pinLength = 1.5f;
+
+    public void SpawnThrowablePin(Vector3 position)
     {
-        //지정한 오브젝트 생성
-        Instantiate(pinPrefab,position,Quaternion.identity);
+        Instantiate(pinPrifeb,position,Quaternion.identity);
+    }
+    public void SpawnStuckPin(float angle)
+    {
+        GameObject clone = Instantiate(pinPrifeb);
+
+        SetInPinStuckToTarget(clone.transform, angle);
+    }
+    private void SetInPinStuckToTarget(Transform pin,float angle)
+    {
+        pin.position = Utils.GetPositionFromAngle(targetRadius + pinLength , angle) +targetPosition;
+        pin.rotation = Quaternion.Euler(0,0,angle);
+        pin.SetParent(targetTransform);
+        pin.GetComponent<Pin>().SetInPinStuckToTarget();
     }
 }
 
 #스테이지 컨트롤 스크립트
-public class Stagecontrol : MonoBehaviour
+public class StageController : MonoBehaviour
 {
     [SerializeField]
-    PinSpawn pinspawn;   //핀 생성을 위한 PinSpawn 컴포넌트
+    private PinSpawner pinSpawner;
     [SerializeField]
-    int throwablecount; //던져야하는갯수
+    private int throwablePinCount;
+    [SerializeField]
+    private int stuckPinCount;
 
-    //던져야하는 첫번쨰 핀위치
-    private Vector3 firstposition = Vector3.down;
-    //던져야하는 핀들 사이의 거리
-    public float pindistance { private set; get; } = 1;
+    private Vector3 firstTPinPosition = Vector3.down * 2;
+    public float TPinDistance { private set; get; } = 1;
+
     private void Awake()
     {
-        for (int i = 0;i<throwablecount;i++)
+        for(int i = 0; i < throwablePinCount; i++)
         {
-            //Pinspawn 함수 실행
-            pinspawn.Pinspawn(firstposition + Vector3.down * pindistance * i);
+            pinSpawner.SpawnThrowablePin(firstTPinPosition + Vector3.down * TPinDistance * i);
+        }
+        for(int i = 0;i < stuckPinCount; i++)
+        {
+            float angle = (360 / stuckPinCount) * i;
+
+            pinSpawner.SpawnStuckPin(angle);
         }
     }
 }
@@ -65,5 +91,29 @@ public class Pin : MonoBehaviour
     {
         //square를 보이게하기
         square.SetActive(true);
+    }
+}
+#레디안과 디그리 스크립트
+public class Utils
+{
+    public static Vector3 GetPositionFromAngle(float radius,float angle)
+    {
+        Vector3 position = Vector3.zero;
+
+        angle = DegreeToRadian(angle);
+
+        position.x = radius * Mathf.Cos(angle);
+        position.y = radius * Mathf.Sin(angle);
+        return position;
+    }
+    
+
+    public static float DegreeToRadian(float angle)
+    {
+        return Mathf.PI * angle / 180;
+    }
+    public static float RadianToDegree(float angle)
+    {
+        return angle * (180 / Mathf.PI);
     }
 }
