@@ -6,7 +6,7 @@ public class Rotate : MonoBehaviour
     //회전 속도 선언
     [SerializeField]
     float rotatespeed = 50;
-    //회전 방향 선정
+    //회전 방향 선정(forward는 왼쪽 방향)
     [SerializeField]
     Vector3 rotateangle = Vector3.forward;
 
@@ -21,10 +21,12 @@ public class Rotate : MonoBehaviour
 public class PinSpawner : MonoBehaviour
 {
     [Header("Commons")]
+    //pinPrifeb선정
     [SerializeField]
     private GameObject pinPrifeb;
 
     [Header("Stuck Pin")]
+    
     [SerializeField]
     private Transform targetTransform;
     [SerializeField]
