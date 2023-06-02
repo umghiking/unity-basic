@@ -1,0 +1,26 @@
+public class Player : MonoBehaviour
+{
+    [SerializeField]
+    private float walkspeed = 2f;
+    [SerializeField]
+    private Vector3 vec = Vector3.zero;
+    private Animator animator;
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+
+        vec = new Vector3 (x, y);
+        transform.position += vec * walkspeed * Time.deltaTime;
+
+        
+        
+            animator.SetInteger("horizontal", (int)x);
+            animator.SetInteger("vertical", (int)y);
+        
+    }
+}
