@@ -1,0 +1,19 @@
+//Animator 사용법
+
+private Animator animator;
+private void Awake
+{
+  
+  animator = Getcomponent<Animator>();
+}
+
+//파라미터 설정
+animator.GetInteger(함수 이름,int값)
+animator.GetBool(함수 이름,bool값)
+animator.GetFloat(함수 이름,float값)
+animator.GetTrigger(함수 이름)
+
+//피라미터값 참조
+bool value = animator.GetInteger(함수 이름)
+int value = animator.GetBool(함수 이름)
+float value = animator.GetFloat(함수 이름)
