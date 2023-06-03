@@ -62,8 +62,8 @@ public class StageController : MonoBehaviour
     private PinSpawner pinSpawner;
     [SerializeField]
     private int throwablePinCount;
-    [SerializeField]
-    private int stuckPinCount;
+    [SerializeField]                [SerializeField]  //배열로 angle값 넣기
+    private int stuckPinCount;      private int[] stuckPinAngles;
 
     private Vector3 firstTPinPosition = Vector3.down * 2;
     public float TPinDistance { private set; get; } = 1;
@@ -74,10 +74,10 @@ public class StageController : MonoBehaviour
         {
             pinSpawner.SpawnThrowablePin(firstTPinPosition + Vector3.down * TPinDistance * i);
         }
-        for(int i = 0;i < stuckPinCount; i++)
-        {
-            float angle = (360 / stuckPinCount) * i;
-
+        for(int i = 0;i < stuckPinCount; i++)                   for(int i =0;i < stuckPinCount.Lenght;i++)
+        {                                                       {            
+            float angle = (360 / stuckPinCount) * i;                pinSpawner.SpawnStuckPin(stuckPinCount[i]);
+                                                                }
             pinSpawner.SpawnStuckPin(angle);
         }
     }
