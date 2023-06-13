@@ -1,1 +1,136 @@
+#랜던
+Random random = new Random();
+int ai = random.Next(0,3);   #0부터 2까지
 
+#상속성
+class Player  #부모
+    {
+        static public int count = 1;
+        public int id;
+        public int hp;
+        public int attack;    
+
+        public Player()  
+        {
+           
+        }
+    }
+    class Knight : Player  #자식 : 부모의 변수와 함수를 받는다
+    {
+        Knight() { 
+            Knight knight = new Knight();
+            knight.hp = 100;
+            knight.attack = 10;
+        }
+    }
+    
+    #은닉성
+    public  //외부 공유
+    protected  //상속을 받는다면 사용가능
+    private  //내부에서만 사용
+    
+#타입변환
+namespace CSharps
+{
+    class Player
+    {
+        protected int hp;
+        protected int attack;
+    }
+    class Knight : Player
+    {
+
+    }
+    class Mage : Player
+    {
+        public int mp;
+    }
+    class Program
+    {
+        static void EnterGame(Player player)
+        {
+            Mage isMage = (player as Mage);  //player가 타입이 Mage라면 !null 아니면 null값이 됨
+            if(isMage != null)  
+            {
+                Mage mage = (Mage)player;
+                mage.mp = 10;
+                Console.WriteLine("마법사임");
+            }
+            
+        }
+       static void Main(string[] args)
+        {
+            Knight knight = new Knight();
+            Mage mage = new Mage();
+
+            Player magePlayer = mage;
+            Mage mage2 = (Mage)magePlayer;    //Player였던 magePlayer를 Mage타임으로 바꾼다
+            EnterGame(knight);
+        }
+       
+    }
+}
+
+#다형성
+using System;
+using System.Threading.Channels;
+
+namespace CSharps
+{
+    class Player
+    {
+        protected int hp;
+        protected int attack;
+
+        public virtual void Move()  //다향성을 쓰기위해 부모에 virtual을 쓴다
+        {
+            Console.WriteLine("Player가 움직입니다");
+        }
+    }
+    class Knight : Player
+    {
+        public override void Move() //다양성을 쓰기위해 override를 쓴다
+        {
+            Console.WriteLine("Knight가 움직입니다");
+        }
+    }
+    class Mage : Player
+    {
+        public override void Move()
+        {
+            Console.WriteLine("Mage가 움직입니다");
+        }
+    }
+    class Program
+    {
+        static void EnterGame(Player player)
+        {
+            player.Move();  //다형성으로 player의 타입에 따라 실행하는 Move함수가 다르다
+        }
+       static void Main(string[] args)
+        {
+            Knight knight = new Knight();
+            Mage mage = new Mage();
+           
+            
+            EnterGame(knight);
+        }
+       
+    }
+}
+
+#문자열
+string name = "Harry Potter";
+
+            //찾기
+            bool found = name.Contains("Harry");
+            int index = name.IndexOf('P');
+            //변형
+            name = name + "Junior";
+            
+            string lowerCaseName = name.ToLower();    //소문자 
+            string upperCaseName = name.ToUpper();    //대문자
+            string newName = name.Replace('r','l');  //r을 l로 바꾼다
+            //분할
+            string[] names = name.Split(new char[] { ' ' });  
+            string substringName = name.Substring(5);  //5번째 까지 쓰이지 않음
