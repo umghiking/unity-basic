@@ -11,4 +11,120 @@ list.Remove(3);  //3을 지우는데 리스트중 가장 먼저있는 3을 지�
 list.Clear();  //리스트를 다 삭제
 
 #dictionary
+class Monster
+{
+    Monster(int id)
+  {
+    -id = id
+  }
+  public int -id;
+}
+Dictionary<int,Monster> dic = new Dictionary<int,Monster>(); 
+dic.Add()
 
+#일반화
+        class MyList<T>  #<T>로 조커처럼 뭐든지 됨
+        {
+            T[] arr = new T[10];
+            public T GetItem(int i)
+            {
+                return arr[i];
+            }
+        }
+        private static void Main(string[] args)
+        {
+            MyList<int> list = new MyList<int>();
+            int item = list.GetItem(4);
+            Test<int>(3);
+        }
+        static void Test<T>(T input)  //함수도 매개변수로 가능
+      {
+          
+      }
+
+#인터페이스
+interface IFliable
+{
+  void Fly();
+}
+class Orc{}
+class FliableOrc : Orc, IFliable   //다중으론 부모클래스를 할수 없어서 인터패이스로해서 인터페이스의 함수를 사용하게만든다
+{
+  public void Fly
+  {
+
+  }
+}
+#프로퍼티
+class Knight
+{
+  public int Hp
+  {
+    get {return hp;}
+    set {hp = value;)
+  }
+}
+#델리게이트
+delegate int OnClicked();
+        static void ButtonPressed(OnClicked clickfunction)
+        {
+            clickfunction();
+        }
+        static int Test() {
+            Console.WriteLine("Hello");
+            return 0;
+        }
+        static int Test2()
+        {
+            Console.WriteLine("Hello2");
+            return 0;
+        }
+        private static void Main(string[] args)
+        {
+            ButtonPressed(Test);
+            OnClicked onClicked = new OnClicked(Test);
+
+            onClicked += Test2;
+            onClicked();
+        }
+#이벤트
+class Program                                                          
+    {                                                          
+
+        static void OnInputTest()                              
+        public delegate void OnInputKey();
+        public event OnInputKey InputKey;
+
+        public void Update()
+        {
+
+            if (Console.KeyAvailable == false)
+                return;
+            ConsoleKeyInfo info = Console.ReadKey();
+            if (info.Key == ConsoleKey.A)
+            {
+                InputKey();
+            }
+
+
+        }
+    }
+     class Program
+    {
+        
+        {
+            Console.WriteLine("Input");                          
+        }
+        
+         static void Main(string[] args)                        
+        {
+                                                                  
+            Program program = new Program();                          
+            program.InputKey += OnInputTest;                            
+            while (true)                                                
+            {                                                              
+                program.Update();                                    
+            }                                                                    
+            
+        }                                                                          
+    }
