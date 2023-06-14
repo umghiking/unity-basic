@@ -1,1 +1,14 @@
+#배열
+foreach(int score in scores)
+{
+  ConSole.WriteLine(score);
+}
+#List
+List<int> list = new List<int>();
+list.Add(2);  //2를 리스트에 더해준다
+list.Insert(2, 10);  //배열로 2의 자리에 10을 넣어준다
+list.Remove(3);  //3을 지우는데 리스트중 가장 먼저있는 3을 지운다
+list.Clear();  //리스트를 다 삭제
+
+#dictionary
 
